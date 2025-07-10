@@ -8,7 +8,7 @@ import java.util.HashMap
 
 class LocationParserUtil {
     companion object {
-        fun getLocationMapFromLocation(location: Location): HashMap<String, Any?> {
+        fun getLocationMapFromLocation(location: Location): HashMap<String, Any> {
             var speedAccuracy = 0f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 speedAccuracy = location.speedAccuracyMetersPerSecond
@@ -32,7 +32,7 @@ class LocationParserUtil {
             )
         }
 
-        fun getLocationMapFromLocation(location: LocationResult?): HashMap<String, Any?>? {
+        fun getLocationMapFromLocation(location: LocationResult?): HashMap<String, Any>? {
             val firstLocation = location?.lastLocation ?: return null
 
             var speedAccuracy = 0f
@@ -54,7 +54,7 @@ class LocationParserUtil {
                 Keys.ARG_SPEED_ACCURACY to speedAccuracy,
                 Keys.ARG_HEADING to firstLocation.bearing,
                 Keys.ARG_TIME to firstLocation.time.toDouble(),
-                Keys.ARG_PROVIDER to firstLocation.provider,
+                Keys.ARG_PROVIDER to (firstLocation.provider ?: "")
             )
         }
     }
